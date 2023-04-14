@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+    id 'project.java-conventions'
+    id 'project.publication-conventions'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Auderis Pennant API',
+            'Implementation-Version': archiveVersion,
+            'Implementation-Vendor': 'Auderis',
+        )
+    }
+}
+
+publishing {
+    publications.mainLibrary.pom {
+        name = 'Auderis Pennant API'
+        description = '''
+            Auderis Pennant is an advanced feature flag library for Java.
+            This module contains Java annotations that are intended for
+            production code where feature flags are used.
+            '''
+    }
+}
