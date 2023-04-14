@@ -1,0 +1,59 @@
+/**
+ * --------------------------------------------------
+ * DEFAULT CONFIGURATION OF LIBRARY PUBLICATION TASKS
+ * --------------------------------------------------
+ */
+
+plugins {
+    id 'maven-publish'
+    id 'signing'
+}
+
+tasks.withType(AbstractArchiveTask) {
+    reproducibleFileOrder = true
+    preserveFileTimestamps = false
+}
+
+publishing {
+    publications {
+        mainLibrary(MavenPublication) {
+            from components.java
+
+            pom {
+                url = 'https://github.com/bbobcik/pennant'
+                inceptionYear = '2023'
+                packaging = 'jar'
+
+                licenses {
+                    license {
+                        name = 'Mozilla Public License 2.0'
+                        url = 'https://www.mozilla.org/en-US/MPL/2.0/'
+                    }
+                }
+
+                organization {
+                    name = 'Boleslav Bobcik - Auderis'
+                }
+
+                developers {
+                    developer {
+                        name = 'Boleslav Bobcik'
+                        email = 'bbobcik@gmail.com'
+                        organization = 'Auderis'
+                        organizationUrl = 'https://github.com/bbobcik'
+                    }
+                }
+
+                scm {
+                    url = 'https://github.com/bbobcik/pennant.git'
+                    connection = 'scm:https://github.com/bbobcik/pennant.git'
+                    developerConnection = 'scm:git@github.com:bbobcik/pennant.git'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mainLibrary
+}

@@ -1,0 +1,2 @@
+// Gradle tries to look up this file in various places, therefore a mere
+// presence of an empty file cuts this operation duration to a minimum

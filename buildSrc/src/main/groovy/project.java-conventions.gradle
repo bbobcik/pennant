@@ -1,0 +1,51 @@
+/**
+ * -----------------------------------------------
+ * DEFAULT CONFIGURATION OF JAVA COMPILATION TASKS
+ * -----------------------------------------------
+ */
+
+group = rootProject.group
+version = rootProject.version
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    withJavadocJar()
+    withSourcesJar()
+}
+
+//dependencies {
+//    // Use Wildfly BOM to declare versions of many infrastructure
+//    // components and libraries
+//    compileOnlyApi platform(libs.wildflyBom)
+//
+//    // Default set of dependencies for unit tests
+//    testImplementation libs.bundles.testPlatform
+//    testRuntimeOnly libs.bundles.testPlatformRuntime
+//}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_9
+    options.release = 9
+    options.encoding = java.nio.charset.StandardCharsets.UTF_8.name()
+    options.debug = project.hasProperty('java.debug') ? project.property('java.debug') : true
+    options.warnings = true
+    options.javaModuleVersion = provider { version }
+}
+
+tasks.withType(Test) {
+    final def skipTests = providers.gradleProperty('skipTests')
+    onlyIf('skipTests not present') {
+        final def blockFlag = skipTests.getOrElse('false').toLowerCase()
+        return ['true', 'yes', ''].contains(blockFlag)
+    }
+
+    useJUnitPlatform()
+    jvmArgs += [
+            '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.io=ALL-UNNAMED',
+            '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    ]
+}

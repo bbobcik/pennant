@@ -1,0 +1,27 @@
+// BUILD PLUGIN SOURCES
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+
+// -----------------------------------------------------------------------------
+// DEFINE PROJECT STRUCTURE
+
+rootProject.name = 'pennant'
+
+include 'pennant-api'
+
+
+// -----------------------------------------------------------------------------
+// CENTRALIZED REPOSITORY DEFINITIONS
+
+dependencyResolutionManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    // Library versions are kept in gradle/libs.versions.toml
+}
