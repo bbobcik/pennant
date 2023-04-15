@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+    id 'project.java-conventions'
+    id 'project.publication-conventions'
+}
+
+dependencies {
+    api libs.junitApi
+    implementation project(':pennant-api')
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Auderis Pennant JUnit5 Test Support',
+            'Implementation-Version': archiveVersion,
+            'Implementation-Vendor': 'Auderis',
+        )
+    }
+}
+
+publishing {
+    publications.mainLibrary.pom {
+        name = 'Auderis Pennant Test Support'
+        description = '''
+            Auderis Pennant is an advanced feature flag library for Java.
+            This module supports writing and running tests that involve
+            code with feature flags.
+            '''
+    }
+}

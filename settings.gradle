@@ -13,6 +13,7 @@ pluginManagement {
 rootProject.name = 'pennant'
 
 include 'pennant-api'
+include 'pennant-junit'
 
 
 // -----------------------------------------------------------------------------

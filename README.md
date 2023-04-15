@@ -1,6 +1,7 @@
 # Auderis Pennant
 Advanced feature flags for Java
 
+---
 
 ## Overview
 
@@ -24,7 +25,7 @@ The project consists of three parts:
   catalog, generation of feature flag documentation, etc.
 - _Pennant Runtime_ is a module that (along with the instrumented production code)
   provides the actual feature flag functionality and offers a management interface.
-
+- _Pennant JUnit_ facilitates the management of feature flags within unit tests.
 
 ### Goals
 

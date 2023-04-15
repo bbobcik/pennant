@@ -15,15 +15,11 @@ java {
     withSourcesJar()
 }
 
-//dependencies {
-//    // Use Wildfly BOM to declare versions of many infrastructure
-//    // components and libraries
-//    compileOnlyApi platform(libs.wildflyBom)
-//
-//    // Default set of dependencies for unit tests
-//    testImplementation libs.bundles.testPlatform
-//    testRuntimeOnly libs.bundles.testPlatformRuntime
-//}
+dependencies {
+    // Default set of dependencies for unit tests
+    testImplementation libs.bundles.testPlatform
+    testRuntimeOnly libs.bundles.testPlatformRuntime
+}
 
 tasks.withType(JavaCompile) {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -36,10 +32,10 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
-    final def skipTests = providers.gradleProperty('skipTests')
-    onlyIf('skipTests not present') {
-        final def blockFlag = skipTests.getOrElse('false').toLowerCase()
-        return ['true', 'yes', ''].contains(blockFlag)
+    final def runTests = providers.gradleProperty('runTests')
+    onlyIf('runTests enabled') {
+        final def runFlag = runTests.getOrElse('true').toLowerCase()
+        return !['false', 'no'].contains(runFlag)
     }
 
     useJUnitPlatform()
